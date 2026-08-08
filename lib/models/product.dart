@@ -31,4 +31,16 @@ class Product {
       ratingCount: json['rating']['count'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'price': price,
+      'description': description,
+      'category': category,
+      'image': image,
+      'rating': {'rate': rating, 'count': ratingCount},
+    };
+  }
 }
