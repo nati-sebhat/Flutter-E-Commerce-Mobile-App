@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/cart_item.dart';
 
-class StorageService {
+class StorageService{
   static const _tokenKey = 'auth_token';
   static const _userIdKey = 'user_id';
   static const _cartKey = 'cart_items';
@@ -13,8 +13,8 @@ class StorageService {
     await prefs.setInt(_userIdKey, userId);
   }
 
-  Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<String?> getToke() async {
+    final prefs =  await SharedPreferences.getInstance();
     return prefs.getString(_tokenKey);
   }
 
@@ -23,7 +23,7 @@ class StorageService {
     return prefs.getInt(_userIdKey);
   }
 
-  Future<void> clearSession() async {
+  Future <void> clearSession() async{
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_tokenKey);
     await prefs.remove(_userIdKey);
@@ -38,7 +38,8 @@ class StorageService {
   Future<List<CartItem>> loadCart() async {
     final prefs = await SharedPreferences.getInstance();
     final raw = prefs.getString(_cartKey);
-    if (raw == null) return [];
+
+    if(raw == null) return [];
     final List<dynamic> decoded = jsonDecode(raw);
     return decoded.map((json) => CartItem.fromJson(json)).toList();
   }

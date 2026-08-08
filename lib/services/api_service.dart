@@ -26,6 +26,18 @@ class ApiService {
     }
   }
 
+  Future <List<Product>> getProductsByCategory(String category) async{
+    final response = await http.get(Uri.parse('$baseUrl/products/category/$category'));
+
+    if(response.statusCode == 200){
+      final List<dynamic> data = jsonDecode(response.body);
+      return data.map((json) => Product.fromJson(json)).toList();
+    }else{
+      throw Exception('Failed to load products by category');
+    }
+
+  }
+
   Future<User> getUser(int userId) async {
     final response = await http.get(Uri.parse('$baseUrl/users/$userId'));
     if (response.statusCode == 200) {
@@ -43,8 +55,7 @@ class ApiService {
     body: jsonEncode({'username': username, 'password': password}),
   );
 
-  print('LOGIN STATUS CODE: ${response.statusCode}');
-  print('LOGIN RESPONSE BODY: ${response.body}');
+
 
   if (response.statusCode == 200 || response.statusCode == 201) {
     final data = jsonDecode(response.body);

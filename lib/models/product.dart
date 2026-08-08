@@ -43,4 +43,6 @@ class Product {
       'rating': {'rate': rating, 'count': ratingCount},
     };
   }
-}
+
+  
+  }
