@@ -13,7 +13,7 @@ class StorageService{
     await prefs.setInt(_userIdKey, userId);
   }
 
-  Future<String?> getToke() async {
+  Future<String?> getToken() async {
     final prefs =  await SharedPreferences.getInstance();
     return prefs.getString(_tokenKey);
   }
